@@ -1,0 +1,32 @@
+ok so this will be your first practice with just simple coding principles
+
+you guys will be using python for the code we will be writing on the rasp pi, so i want u guys to have some experience
+with how logic works with python
+
+i know these are really simple problems, and the answers can be pretty easily found online, but i want you 
+guys to give this the best shot you can - feel free to google stuff you don't knwo how to do, but 
+i want this to challenge you to some extent 
+looking stuff up is an ESSENTIAL part of learning and growing a skill, but give it an honest effort
+so like dotn ask other people to write it for you, and don't look at each others' code
+THERE ARE MULTIPLE WAYS TO DO THIS THERE IS NOT A SINGLE CORRECT ANS
+
+First problem:
+	Fizz buzz
+		for all whole numbers from 1 to 100
+		if the number is a multiple of 3, print fizz
+		if the number is a mult of 5, print buzz
+		if both (ex. 15), print fizzbuzz
+		otherwise, print the number
+		(tbh i kinda gave you the solution to this one)
+
+Second problem
+	Primes
+		find and print all the prime numbers between 1 and n,
+		n being any positive integer, given through input 
+		(a prime number is defined as an integer with its only factors being 1 and itself)
+
+		*this is a more involved problem, and might take you some time, if you need help, just ask
+
+Third problem
+	maybe something even more involved - so its collaborative
+	first thougts are tic-tac-toe in the console/sort a list(that'll be a toughie but i like)/
