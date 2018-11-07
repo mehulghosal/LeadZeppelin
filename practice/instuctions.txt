@@ -27,6 +27,20 @@ Second problem
 
 		*this is a more involved problem, and might take you some time, if you need help, just ask
 
-Third problem
-	maybe something even more involved - so its collaborative
-	first thougts are tic-tac-toe in the console/sort a list(that'll be a toughie but i like)/
+OK SO NONE OF YOU PAID ATTENTION TO THE GIT SEMINAR SO I GUESS THIS IS HOW IT GOES I GUESS
+Git Instructions:
+
+1. follow me (mehulghosal) on github pls and thank and star the repo
+2. in terminal: git clone "https://github/mehulghosal/leadzeppelin"
+3. cd leadzeppelin/practice (go into the practice directory)
+4. open YOUR FILE in your preferred text editor (i suggest sublime text)
+5. write code
+6. when ur ready to test, in terminal, "python3 filename.py"(mac/linux) or "python filename.py"
+
+7. when u think ur ready to publish, in terminal USE THESE COMMANDS IN ORDER
+	git add .
+	git commit -m"changed filename.py"
+	git push
+
+*git push might as you to log into github - do so 
+if u have any more questions - dm me
