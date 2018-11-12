@@ -19,4 +19,15 @@ for i in range(1,101):
 		print(i)
 	elif (i%9==0):
 		print(i)
-		
+
+num = int(input("Enter a number"))
+if (num < 1):
+	print("YouFudgedUpBro")
+if (num > 1):
+	for i in range (2,num):
+		if (num % i) == 0:
+			print (num, "ce n'est pas un prime number")	
+			print (i, "times", num//i, "is", num)
+	else:
+		print(num, "ITS A PRIME NUMERO Senoritas")
+
