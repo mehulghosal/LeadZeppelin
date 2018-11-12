@@ -7,7 +7,10 @@ def fizzBuzz():
 			finalStr += "fizz"
 		if i % 5 == 0:
 			finalStr += "buzz"
-		print(str(i) + "\t" + str(finalStr))
+		if finalStr == "":
+			print(str(i))
+		else:
+			print(str(finalStr))
 
 def isPrime(num):
 	if num == 1:
