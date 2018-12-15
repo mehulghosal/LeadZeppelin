@@ -1,5 +1,5 @@
 import time
-
+'''
 t = time.time()
 print("hello world")
 
@@ -7,7 +7,19 @@ for i in range(5000):
 	print(i)
 
 print(time.time() - t)
+'''
 
+#doc : https://gpiozero.readthedocs.io/en/latest/index.html
+import gpiozero as gpio
+l = gpio.LED(21)
+while True:
+    l.on()
+    time.sleep(1);
+    l.off()
+    time.sleep(1);
+
+'''
+#this does not work
 import RPIO.GPIO as gpio
 gpio.setmode(gpio.board)
 
@@ -23,3 +35,4 @@ try:
 except KeyboardInterrupt:
 	servo.stop()
 	GPIO.cleanup()
+'''
