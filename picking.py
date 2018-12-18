@@ -12,6 +12,7 @@ STRUMINANGLE = -90
 
 #INIT SERVOS
 strummer = gpio.AngularServo(2, initial_angle=0, min_angle= STRUMINANGLE, max_angle=STRUMAXANGLE)
+#lowest to high
 s1 = gpio.AngularServo(3, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
 s2 = gpio.AngularServo(4, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
 s3 = gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
@@ -43,4 +44,23 @@ def pick(string):
 			s2.min()
 		elif state[2] == MINANGLE:
 			s2.max()
-	#repeat
+	elif string == 3:
+		if state[3] == MAXANGLE:
+			s3.min()
+		elif state[3] == MINANGLE:
+			s3.max()
+	elif string == 4:
+		if state[4] == MAXANGLE:
+			s4.min()
+		elif state[4] == MINANGLE:
+			s4.max()
+	elif string == 5:
+		if state[5] == MAXANGLE:
+			s5.min()
+		elif state[5] == MINANGLE:
+			s5.max()
+	elif string == 6:
+		if state[6] == MAXANGLE:
+			s6.min()
+		elif state[6] == MINANGLE:
+			s6.max()
