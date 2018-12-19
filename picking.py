@@ -1,8 +1,8 @@
 import gpiozero as gpio
 
 #max and min
-MAXANGLE = 90
-MINANGLE = -90
+MAXANGLE = 45
+MINANGLE = 0
 
 STRUMAXANGLE = 90
 STRUMINANGLE = -90
@@ -32,9 +32,11 @@ def strum():
 		strummer = strummer.max_angle
 
 #param string of type integer is which string is to be picked 
+#does gpio wait until completion? - if not, we have to manually add delays
 def pick(string):
 	state = state()
-	if string == 1:
+	if string == 0: strum()
+	elif string == 1:
 		if state[1] == MAXANGLE:
 			s1.min()
 		elif state[1] == MINANGLE:
