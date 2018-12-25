@@ -11,14 +11,7 @@ STRUMINANGLE = -90
 #angle values are temporary - change as needed
 
 #INIT SERVOS
-strummer = gpio.AngularServo(2, initial_angle=0, min_angle= STRUMINANGLE, max_angle=STRUMAXANGLE)
-#lowest to high
-s1 = gpio.AngularServo(3, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
-s2 = gpio.AngularServo(4, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
-s3 = gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
-s4 = gpio.AngularServo(6, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
-s5 = gpio.AngularServo(7, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
-s6 = gpio.AngularServo(8, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)
+servos = [gpio.AngularServo(2, initial_angle=0, min_angle= STRUMINANGLE, max_angle=STRUMAXANGLE), gpio.AngularServo(3, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(4, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(6, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(7, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(8, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)]
 
 #returns list of angle values in order servos are defined
 def state():
