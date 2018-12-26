@@ -1,8 +1,8 @@
 import gpiozero as gpio
 
 #max and min
-MAXANGLE = -15
-MINANGLE = 15
+MAXANGLE = 15
+MINANGLE = -15
 
 STRUMMAXANGLE = 30
 STRUMMINANGLE = -30
