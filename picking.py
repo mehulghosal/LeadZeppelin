@@ -1,11 +1,11 @@
 import gpiozero as gpio
 
 #max and min
-MAXANGLE = 15
-MINANGLE = -15
+MAXANGLE = 7.5
+MINANGLE = -7.5
 
-STRUMMAXANGLE = 30
-STRUMMINANGLE = -30
+STRUMMAXANGLE = 15
+STRUMMINANGLE = -15
 
 #pin numbers are temporary - change as needed
 #angle values are temporary - change as needed
