@@ -6,3 +6,5 @@ this project is a continuation of Alden Lamp, David Shustin, Claire Yan, and Jai
 i decided to continue this bc i thought it was rly cool
 
 all code is meant for raspberry pi
+
+
