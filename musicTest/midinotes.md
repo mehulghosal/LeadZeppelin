@@ -7,6 +7,8 @@
 * note on plays a note, note off turns it off
 * note parameter in note message is the pitch: 60 = middle C, one integer step is half tone
 * time is the delta time in ticks: "ticks_per_beat in MidiFile objects"
+* tempo is measured in milliseconds per beat: 500,000 == 120 bpm
+* the larger the tempo is, the slower the actual bpm is
 
 to do:
 * u guys can individually learn how to read in a text file 
