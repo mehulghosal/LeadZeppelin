@@ -27,30 +27,55 @@ def calcOctave(noteName):
  #        10: "A#/Bb",
  #        11: "B"
  #    }
-    if octave == 2:
-    	if noteName < 4:
-    		return "Cannot be played with normal guitar tuning"
-    elif octave < 2:
-    	return "Cannot be played with normal guitar tuning"
-	return noteName, octave
+	if octave == 2:
+		if noteName < 4:
+			return "Cannot be played with normal guitar tuning"
+	elif octave < 2:
+		return "Cannot be played with normal guitar tuning"
+	return (noteName, octave)
 
-def parse(mid):
-	chords = []
+def parse(midiName):
+	mid = MidiFile(midiName)
+
+	chords = []#to hold all the chords
+	chordNotes = []#to track the notes parsed. example list: [(4,1),(7,1),("time",120)] -> play E1 & G1 for 120ms
 	tempoChanges = []
+
+	firstOn = True
+	firstOff = True
+
 	for i, track in enumerate(mid.tracks):
 		for msg in track:
 			m = str(msg)
 			if msg.type == "set_tempo":
 				indexOfTempo = m.index("tempo=",0)+6
-				indexOfSpace = m.index(" ",indexOfTempo)+0
+				indexOfSpace = m.index(" ",indexOfTempo)
 				tempo = m[indexOfTempo:indexOfSpace]
-				tempoChanges.append(int(tempo))
+				indexOfTime = m.index("time=",0)+6
+				time = m[indexOfTime:]
+				tempoChanges.append(int(tempo),int(time))
 			else:
 				if msg.type == "note_on":
-					indexOfNote = m.index("note=",0)+5
-					indexOfSpace = m.index(" ",indexOfNote)+0
-					note = m[indexOfNote:indexOfSpace]
-					calcOctave(int(note))
-				else msg.type == "note_off":
+					if firstOn == True:#all notes in previous chord have been turned on & off, so new chord.
+						chords.append(chordNotes)#therefore, add the previous chord to the chords
+						firstOn = False
 
-	return tempoChanges, chords
+					indexOfNote = m.index("note=",0)+5
+					indexOfSpace = m.index(" ",indexOfNote)
+					note = m[indexOfNote:indexOfSpace]
+					chordNotes.append(calcOctave(int(note)))
+
+					firstOff = True
+				elif msg.type == "note_off":
+					if firstOff == True:
+						indexOfTime = m.index("time=",0)+6
+						time = m[indexOfTime:]
+						chordNotes.append(("time",int(time)))
+
+						firstOff = False
+						firstOn = True
+	print(tempoChanges, chords)
+	mid.close()
+	return
+
+parse("Bach_My_Heart_Ever_Faithful_BWV34.mid")
