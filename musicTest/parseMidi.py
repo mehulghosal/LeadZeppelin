@@ -41,9 +41,8 @@ def parse(midiName):
 	chordNotes = []#to track the notes parsed. example list: [(4,1),(7,1),("time",120)] -> play E1 & G1 for 120ms
 	tempoChanges = []
 
-	firstOn = True
+	firstOn = False
 	firstOff = True
-
 	for i, track in enumerate(mid.tracks):
 		for msg in track:
 			m = str(msg)
@@ -51,13 +50,18 @@ def parse(midiName):
 				indexOfTempo = m.index("tempo=",0)+6
 				indexOfSpace = m.index(" ",indexOfTempo)
 				tempo = m[indexOfTempo:indexOfSpace]
-				indexOfTime = m.index("time=",0)+6
-				time = m[indexOfTime:]
-				tempoChanges.append(int(tempo),int(time))
+				indexOfTime = m.index("time=",0)+5
+				indexOfGTS = m.index(">",0)#GTS = greater-than sign or '>'
+				time = m[indexOfTime:indexOfGTS]
+				
+				tempoChanges.append((int(tempo),int(time)))
 			else:
 				if msg.type == "note_on":
-					if firstOn == True:#all notes in previous chord have been turned on & off, so new chord.
-						chords.append(chordNotes)#therefore, add the previous chord to the chords
+					if firstOn == True and chordNotes:#all notes in previous chord have been turned on & off, so new chord.
+						chord = []
+						chord.extend(chordNotes)
+						chords.append(chord)#add the 'packaged' chord to the chords
+						chordNotes.clear()
 						firstOn = False
 
 					indexOfNote = m.index("note=",0)+5
@@ -68,14 +72,12 @@ def parse(midiName):
 					firstOff = True
 				elif msg.type == "note_off":
 					if firstOff == True:
-						indexOfTime = m.index("time=",0)+6
+						indexOfTime = m.index("time=",0)+5
 						time = m[indexOfTime:]
 						chordNotes.append(("time",int(time)))
 
 						firstOff = False
 						firstOn = True
-	print(tempoChanges, chords)
-	mid.close()
-	return
+	return chords
 
 parse("Bach_My_Heart_Ever_Faithful_BWV34.mid")
