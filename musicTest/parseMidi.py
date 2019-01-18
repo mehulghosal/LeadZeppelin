@@ -79,5 +79,3 @@ def parse(midiName):
 						firstOff = False
 						firstOn = True
 	return chords
-
-parse("Bach_My_Heart_Ever_Faithful_BWV34.mid")
