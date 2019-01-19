@@ -24,3 +24,4 @@ all code is meant for raspberry pi
 * Shiky Gurung
 * Aoife Weiss
 * Dan O'Sullivan
+* Alex Barker
