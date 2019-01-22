@@ -78,4 +78,4 @@ def parse(midiName):
 
 						firstOff = False
 						firstOn = True
-	return chords
+	return tempoChanges, chords
