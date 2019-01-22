@@ -1,9 +1,8 @@
 import mido
-from mido import MidiFile
 
 def calcOctave(noteName):
 	#60 = C4
-	#notes are from 0-127 ()
+	#notes are from 0-127
 	#midi can somehow play a C(-1), below C0. Do not be alarmed
 	octave = -1
 	while True:
@@ -34,8 +33,12 @@ def calcOctave(noteName):
 		return "Cannot be played with normal guitar tuning"
 	return (noteName, octave)
 
+
+#midiName - midi file as a string 
+#returns list of chords
+#each chord is a list of tuples, last of which is the time duration of note
 def parse(midiName):
-	mid = MidiFile(midiName)
+	mid = mido.MidiFile(midiName)
 
 	chords = []#to hold all the chords
 	chordNotes = []#to track the notes parsed. example list: [(4,1),(7,1),("time",120)] -> play E1 & G1 for 120ms
@@ -74,8 +77,13 @@ def parse(midiName):
 					if firstOff == True:
 						indexOfTime = m.index("time=",0)+5
 						time = m[indexOfTime:]
-						chordNotes.append(("time",int(time)))
+						chordNotes.append((int(time)))
 
 						firstOff = False
 						firstOn = True
+<<<<<<< HEAD
 	return tempoChanges, chords
+=======
+	return chords
+
+>>>>>>> 6c5610b45682b49a72675f67d0058f840ceec9d0
