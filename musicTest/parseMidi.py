@@ -11,26 +11,12 @@ def calcOctave(noteName):
 			octave += 1
 		else:
 			break
-
-	# switcher = {
- #    	0: "C",
- #        1: "C#/Db",
- #        2: "D",
- #        3: "D#/Eb",
- #        4: "E",
- #        5: "F",
- #        6: "F#/Gb",
- #        7: "G",
- #        8: "G#/Ab",
- #        9: "A",
- #        10: "A#/Bb",
- #        11: "B"
- #    }
-	if octave == 2:
-		if noteName < 4:
-			return "Cannot be played with normal guitar tuning"
-	elif octave < 2:
-		return "Cannot be played with normal guitar tuning"
+	if (#with standard guitar tuning, you can play E2-B5
+		(octave == 2 and noteName < 4) or
+		octave < 2 or
+		octave >= 6
+	):
+		return "Cannot be played with normal guitar tuning"	#change?
 	return (noteName, octave)
 
 
@@ -40,8 +26,8 @@ def calcOctave(noteName):
 def parse(midiName):
 	mid = mido.MidiFile(midiName)
 
-	chords = []#to hold all the chords
-	chordNotes = []#to track the notes parsed. example list: [(4,1),(7,1),("time",120)] -> play E1 & G1 for 120ms
+	chords = [] #to hold all the chords
+	chordNotes = [] #to track the notes parsed. example list: [(4,1),(7,1),("time",120)] -> play E1 & G1 for 120ms
 	tempoChanges = []
 
 	firstOn = False
@@ -54,16 +40,16 @@ def parse(midiName):
 				indexOfSpace = m.index(" ",indexOfTempo)
 				tempo = m[indexOfTempo:indexOfSpace]
 				indexOfTime = m.index("time=",0)+5
-				indexOfGTS = m.index(">",0)#GTS = greater-than sign or '>'
+				indexOfGTS = m.index(">",0) #GTS = greater-than sign or '>'
 				time = m[indexOfTime:indexOfGTS]
 				
 				tempoChanges.append((int(tempo),int(time)))
 			else:
 				if msg.type == "note_on":
-					if firstOn == True and chordNotes:#all notes in previous chord have been turned on & off, so new chord.
+					if firstOn == True and chordNotes: #all notes in previous chord have been turned on & off, so new chord.
 						chord = []
 						chord.extend(chordNotes)
-						chords.append(chord)#add the 'packaged' chord to the chords
+						chords.append(chord) #add the 'packaged' chord to the chords
 						chordNotes.clear()
 						firstOn = False
 
@@ -81,9 +67,5 @@ def parse(midiName):
 
 						firstOff = False
 						firstOn = True
-<<<<<<< HEAD
-	return tempoChanges, chords
-=======
-	return chords
 
->>>>>>> 6c5610b45682b49a72675f67d0058f840ceec9d0
+	return tempoChanges, chords
