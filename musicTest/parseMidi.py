@@ -69,3 +69,8 @@ def parse(midiName):
 						firstOn = True
 
 	return tempoChanges, chords
+
+mid = mido.MidiFile("Queen_-_Another_One_Bites_the_Dust.mid")
+for i, track in enumerate(mid.tracks):
+	for msg in track:
+		print(msg)

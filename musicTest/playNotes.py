@@ -48,6 +48,7 @@ for s in range(len(chords)): #example: [(0, 4), (9, 3), 120]
 	# 10: "A#/Bb",
 	# 11: "B"
 	for i in range(len(chords[s])-1): #for each tuple excluding time
+		pass
 		#figure out which string to play the note, and where
 			#the lowest note is the second-to-last tuple and goes backwards
 			#the fretboard is 17in long, the exact middle is the metal fret between the 7th and 8th frets
