@@ -1,9 +1,9 @@
-from os import listdir
+from os import listdir, getcwd
 from os.path import isfile, join
 from parseMidi import parse
 
 #figuring out what valid songs are
-mypath = "C:\\Users\\22barkera\\LeadZeppelin\\musicTest"
+mypath = getcwd()
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 validSongs = []
 for i in range(len(onlyfiles)):
