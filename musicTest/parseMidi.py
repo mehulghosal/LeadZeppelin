@@ -11,12 +11,6 @@ def calcOctave(noteName):
 			octave += 1
 		else:
 			break
-	if (#with standard guitar tuning, you can play E2-B5
-		(octave == 2 and noteName < 4) or
-		octave < 2 or
-		octave >= 6
-	):
-		return "Cannot be played with normal guitar tuning"	#change?
 	return (noteName, octave)
 
 
@@ -69,8 +63,3 @@ def parse(midiName):
 						firstOn = True
 
 	return tempoChanges, chords
-
-mid = mido.MidiFile("Queen_-_Another_One_Bites_the_Dust.mid")
-for i, track in enumerate(mid.tracks):
-	for msg in track:
-		print(msg)
