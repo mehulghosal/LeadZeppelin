@@ -16,7 +16,6 @@
 guitarStrings = [[],[],[],[],[],[]] #6 empty arrays that will contain notes that can be played on each string
 
 def tune(tuning = [(4,2), (10,2), (2,3), (7,3), (11,3), (4,4)]): #sets default tuning strings
-	tuning = changeToTuple(tuning)
 	for i in range(6):
 		noteCounter = tuning[i][0]
 		octaveCounter = tuning[i][1]
@@ -31,25 +30,5 @@ def checkNote(noteTuple):
 	possibleStrings = []
 	for i in range(6):
 		if noteTuple in guitarStrings[i]:
-			possibleStrings.append(i)
+			possibleStrings.append( (i,guitarStrings[i].index(noteTuple)) ) #add a tuple with which string and the note's position on it
 	return possibleStrings
-
-def changeToTuple(noteArray):
-	for i in range(6):
-		nValue = 
-		nOctave = 
-		notes = {
-	        "C": 0,
-			"C#/Db": 1,
-			"D": 2,
-			"D#/Eb": 3,
-			"E": 4,
-			"F": 5,
-			"F#/Gb": 6,
-			"G": 7,
-			"G#/Ab": 8,
-			"A": 9,
-			"A#/Bb": 10,
-			"B": 11
-    	}
-    	notes.get(noteArray[i])
