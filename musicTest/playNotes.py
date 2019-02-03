@@ -1,6 +1,7 @@
 from os import listdir, getcwd
 from os.path import isfile, join
 from parseMidi import parse
+from noteMapping import tune, checkNote
 
 #figuring out what valid songs are
 mypath = getcwd()
@@ -34,6 +35,7 @@ for s in range(len(tempoChanges)): #example: (1363636, 52920)
 
 print("\n")
 
+tune()
 for s in range(len(chords)): #example: [(0, 4), (9, 3), 120]
 	# 0: "C",
 	# 1: "C#/Db",
@@ -47,8 +49,9 @@ for s in range(len(chords)): #example: [(0, 4), (9, 3), 120]
 	# 9: "A",
 	# 10: "A#/Bb",
 	# 11: "B"
-	for i in range(len(chords[s])-1): #for each tuple excluding time
-		pass
+	availableStrings = [0,1,2,3,4,5]
+	for i in range(len(chords[s])-1): #for each tuple item, excluding the time
+		
 		#figure out which string to play the note, and where
 			#the lowest note is the second-to-last tuple and goes backwards
 			#the fretboard is 17in long, the exact middle is the metal fret between the 7th and 8th frets
