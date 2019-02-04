@@ -3,6 +3,13 @@ from os.path import isfile, join
 from parseMidi import parse
 from noteMapping import tune, checkNote
 
+distance = [
+	0 #to play open string 0 distance
+	#from middle of first fret to middle of second fret
+	#from middle of second fret to middle of third fret
+	#and so on
+]
+
 #figuring out what valid songs are
 mypath = getcwd()
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
@@ -36,7 +43,8 @@ for s in range(len(tempoChanges)): #example: (1363636, 52920)
 print("\n")
 
 tune()
-for s in range(len(chords)): #example: [(0, 4), (9, 3), 120]
+railPos = [ [10,10,10,10,10,10,0] ] #starting positions (arbitrary for now)
+for c in chords: #example: [(0, 4), (9, 3), 120]
 	# 0: "C",
 	# 1: "C#/Db",
 	# 2: "D",
@@ -49,12 +57,21 @@ for s in range(len(chords)): #example: [(0, 4), (9, 3), 120]
 	# 9: "A",
 	# 10: "A#/Bb",
 	# 11: "B"
-	availableStrings = [0,1,2,3,4,5]
-	for i in range(len(chords[s])-1): #for each tuple item, excluding the time
-		
-		#figure out which string to play the note, and where
-			#the lowest note is the second-to-last tuple and goes backwards
-			#the fretboard is 17in long, the exact middle is the metal fret between the 7th and 8th frets
-			#we would want to play higher up the string if possible bc less movement to change pitch
-	#add the time to wait at the end?
-	print(chords[s])
+	availableStrings = [0,1,2,3,4,5] #strings that can be played
+	for t in reversed(range(len(c)-1)): #for each tuple item, excluding the time, backwards
+		rawPosStrings = checkNote(c[t])
+		print("Possible positions of note: " + str(rawPosStrings)) #for debug
+		relativeDist = {}
+		for k, v in rawPosStrings.items():
+			if k in availableStrings:
+				if v == 0: #open string
+					relativeDist[k] = -1 #prioritize open strings
+				else:
+					relativeDist[k] = abs(v - railPos[len(railPos)-1][k])
+
+		print("Frets away from fret 10: " + str(relativeDist)) #for debug
+		lowestString = min(relativeDist, key=relativeDist.get)
+		lowestDist = relativeDist[lowestString]
+		print("Lowest fret distance is on string: " + str(lowestString) + "\n") #for debug
+		print("Lowest fret distance is: " + str(lowestDist) + "\n") #for debug
+		availableStrings.remove(lowestString)

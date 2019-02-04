@@ -27,8 +27,8 @@ def tune(tuning = [(4,2), (10,2), (2,3), (7,3), (11,3), (4,4)]): #sets default t
 				octaveCounter += 1
 
 def checkNote(noteTuple):
-	possibleStrings = []
+	possibleStrings = {}
 	for i in range(6):
 		if noteTuple in guitarStrings[i]:
-			possibleStrings.append( (i,guitarStrings[i].index(noteTuple)) ) #add a tuple with which string and the note's position on it
+			possibleStrings[i] = guitarStrings[i].index(noteTuple) #add a tuple with which string and the note's position on it
 	return possibleStrings
