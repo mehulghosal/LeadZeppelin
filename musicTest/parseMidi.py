@@ -28,38 +28,39 @@ def parse(midiName):
 	firstOff = True
 	for i, track in enumerate(mid.tracks):
 		for msg in track:
-			m = str(msg)
-			if msg.type == "set_tempo":
-				indexOfTempo = m.index("tempo=",0)+6
-				indexOfSpace = m.index(" ",indexOfTempo)
-				tempo = m[indexOfTempo:indexOfSpace]
-				indexOfTime = m.index("time=",0)+5
-				indexOfGTS = m.index(">",0) #GTS = greater-than sign or '>'
-				time = m[indexOfTime:indexOfGTS]
+			print(msg)
+	# 		m = str(msg)
+	# 		if msg.type == "set_tempo":
+	# 			indexOfTempo = m.index("tempo=",0)+6
+	# 			indexOfSpace = m.index(" ",indexOfTempo)
+	# 			tempo = m[indexOfTempo:indexOfSpace]
+	# 			indexOfTime = m.index("time=",0)+5
+	# 			indexOfGTS = m.index(">",0) #GTS = greater-than sign or '>'
+	# 			time = m[indexOfTime:indexOfGTS]
 				
-				tempoChanges.append((int(tempo),int(time)))
-			else:
-				if msg.type == "note_on":
-					if firstOn == True and chordNotes: #all notes in previous chord have been turned on & off, so new chord.
-						chord = []
-						chord.extend(chordNotes)
-						chords.append(chord) #add the 'packaged' chord to the chords
-						chordNotes.clear()
-						firstOn = False
+	# 			tempoChanges.append((int(tempo),int(time)))
+	# 		else:
+	# 			if msg.type == "note_on":
+	# 				if firstOn == True and chordNotes: #all notes in previous chord have been turned on & off, so new chord.
+	# 					chord = []
+	# 					chord.extend(chordNotes)
+	# 					chords.append(chord) #add the 'packaged' chord to the chords
+	# 					chordNotes.clear()
+	# 					firstOn = False
 
-					indexOfNote = m.index("note=",0)+5
-					indexOfSpace = m.index(" ",indexOfNote)
-					note = m[indexOfNote:indexOfSpace]
-					chordNotes.append(calcOctave(int(note)))
+	# 				indexOfNote = m.index("note=",0)+5
+	# 				indexOfSpace = m.index(" ",indexOfNote)
+	# 				note = m[indexOfNote:indexOfSpace]
+	# 				chordNotes.append(calcOctave(int(note)))
 
-					firstOff = True
-				elif msg.type == "note_off":
-					if firstOff == True:
-						indexOfTime = m.index("time=",0)+5
-						time = m[indexOfTime:]
-						chordNotes.append((int(time)))
+	# 				firstOff = True
+	# 			elif msg.type == "note_off":
+	# 				if firstOff == True:
+	# 					indexOfTime = m.index("time=",0)+5
+	# 					time = m[indexOfTime:]
+	# 					chordNotes.append((int(time)))
 
-						firstOff = False
-						firstOn = True
+	# 					firstOff = False
+	# 					firstOn = True
 
-	return tempoChanges, chords
+	# return tempoChanges, chords

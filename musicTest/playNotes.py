@@ -42,7 +42,7 @@ for s in range(len(tempoChanges)): #example: (1363636, 52920)
 
 print("\n")
 
-tune()
+tune() #if different tuning, put all six strings in argument array
 railPos = [ [10,10,10,10,10,10,0] ] #starting positions (arbitrary for now)
 for c in chords: #example: [(0, 4), (9, 3), 120]
 	# 0: "C",
@@ -70,7 +70,7 @@ for c in chords: #example: [(0, 4), (9, 3), 120]
 					relativeDist[k] = abs(v - railPos[len(railPos)-1][k])
 
 		print("Frets away from fret 10: " + str(relativeDist)) #for debug
-		lowestString = min(relativeDist, key=relativeDist.get)
+		lowestString = min(relativeDist, key=relativeDist.get) #right now just counting frets, not actual distance
 		lowestDist = relativeDist[lowestString]
 		print("Lowest fret distance is on string: " + str(lowestString) + "\n") #for debug
 		print("Lowest fret distance is: " + str(lowestDist) + "\n") #for debug
