@@ -9,10 +9,9 @@ MINANGLE = -1
 
 #INIT SERVOS
 
-servos = [gpio.AngularServo(21, initial_angle=0, min_angle= MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(20, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(4, initial_angle=0), gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(6, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(12, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)]
+servos = [gpio.AngularServo(21, initial_angle=0, min_angle= MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(20, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(4, initial_angle=0, min_angle=60, max_angle=90), gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(6, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(12, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)]
 for i in servos: i.min()
 
-s = [0, 0, 0, 0, 0, 0]
 #returns list of angle values in order servos are defined
 def state():
     s = []
@@ -27,9 +26,9 @@ def pick(string):
     s = state()[string]
     ang = 0
     #Indiv strings
-    if s == MAXANGLE:
+    if s == servos[string].max_angle:
         servos[string].min()
-    elif s == MINANGLE:
+    elif s == servos[string].min_angle:
         servos[string].max()
 
     return ang
