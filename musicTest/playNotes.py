@@ -42,6 +42,7 @@ for s in range(len(tempoChanges)): #example: (1363636, 52920)
 
 tune() #if different tuning, put all six strings in argument array
 railPos = [ [10,10,10,10,10,10,0] ] #starting positions of each of the pushers (10 is arbitrary right now)
+									#list in a list because also holds other rail positions
 pickStrings = []
 for c in chords: #example: [(0, 4), (9, 3), 120]
 	# 0: "C",
@@ -57,7 +58,8 @@ for c in chords: #example: [(0, 4), (9, 3), 120]
 	# 10: "A#/Bb",
 	# 11: "B"
 	availableStrings = [0,1,2,3,4,5] #strings that can be played, 0 lowest 5 is highest
-	stringsToPick = [] #to tell which strings to be pick ed
+	stringsToPick = [] #to tell which strings to be picked
+	newRailPos = []
 	for t in reversed(range(len(c)-1)): #for each tuple item, excluding the time, backwards.
 										#this is because the parseMidi formats the notes highest first, and
 										#lowest must be prioritized. Therefore, last note before the time value
@@ -75,8 +77,11 @@ for c in chords: #example: [(0, 4), (9, 3), 120]
 					relativeDist[k] = abs(v - positionOfString) #distance from pusher to note's fret
 
 		lowestString = min(relativeDist, key=relativeDist.get) #string with lowest distance
-		lowestPos = relativeDist[lowestString] #actual lowest distance value
+		lowestPos = rawPosStrings.get(lowestString) #actual lowest position
+		newRailPos.append()
 		availableStrings.remove(lowestString) #the string is going to be playing a note
 		stringsToPick.append(lowestString) #pick the string
-	railPos.append()
-	pickStrings.append(stringsToPick)
+	newRailPos.append(c.get(len(c)-1)) #append the time of the chord
+	railPos.append(newRailPos) #put the new rail position into list of all of them
+	pickStrings.append(stringsToPick) #put the strings to be picked in the list
+#do stuff with railPos and pickStrings
