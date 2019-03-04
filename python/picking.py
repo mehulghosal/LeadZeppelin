@@ -9,7 +9,7 @@ MINANGLE = -1
 
 #INIT SERVOS
 
-servos = [gpio.AngularServo(21, initial_angle=0, min_angle= MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(20, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(4, initial_angle=0), gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(6, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(7, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)]
+servos = [gpio.AngularServo(21, initial_angle=0, min_angle= MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(20, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(4, initial_angle=0), gpio.AngularServo(5, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(6, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE), gpio.AngularServo(12, initial_angle=0, min_angle=MINANGLE, max_angle=MAXANGLE)]
 for i in servos: i.min()
 
 s = [0, 0, 0, 0, 0, 0]
@@ -28,10 +28,9 @@ def pick(string):
     ang = 0
     #Indiv strings
     if s == MAXANGLE:
-        ang = MINANGLE
+        servos[string].min()
     elif s == MINANGLE:
-        ang = MAXANGLE
+        servos[string].max()
 
-    servos[string].angle = ang
     return ang
 
