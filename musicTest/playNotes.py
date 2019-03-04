@@ -38,12 +38,11 @@ tempoChanges = returnedStuff[0]
 chords = returnedStuff[1]
 
 for s in range(len(tempoChanges)): #example: (1363636, 52920)
-	print(tempoChanges[s])
-
-print("\n")
+	pass
 
 tune() #if different tuning, put all six strings in argument array
-railPos = [ [10,10,10,10,10,10,0] ] #starting positions (arbitrary for now)
+railPos = [ [10,10,10,10,10,10,0] ] #starting positions of each of the pushers (10 is arbitrary right now)
+pickStrings = []
 for c in chords: #example: [(0, 4), (9, 3), 120]
 	# 0: "C",
 	# 1: "C#/Db",
@@ -57,21 +56,27 @@ for c in chords: #example: [(0, 4), (9, 3), 120]
 	# 9: "A",
 	# 10: "A#/Bb",
 	# 11: "B"
-	availableStrings = [0,1,2,3,4,5] #strings that can be played
-	for t in reversed(range(len(c)-1)): #for each tuple item, excluding the time, backwards
-		rawPosStrings = checkNote(c[t])
-		print("Possible positions of note: " + str(rawPosStrings)) #for debug
-		relativeDist = {}
-		for k, v in rawPosStrings.items():
-			if k in availableStrings:
-				if v == 0: #open string
-					relativeDist[k] = -1 #prioritize open strings
-				else:
-					relativeDist[k] = abs(v - railPos[len(railPos)-1][k])
+	availableStrings = [0,1,2,3,4,5] #strings that can be played, 0 lowest 5 is highest
+	stringsToPick = [] #to tell which strings to be pick ed
+	for t in reversed(range(len(c)-1)): #for each tuple item, excluding the time, backwards.
+										#this is because the parseMidi formats the notes highest first, and
+										#lowest must be prioritized. Therefore, last note before the time value
+										#is the lowest note, and start there
 
-		print("Frets away from fret 10: " + str(relativeDist)) #for debug
-		lowestString = min(relativeDist, key=relativeDist.get) #right now just counting frets, not actual distance
-		lowestDist = relativeDist[lowestString]
-		print("Lowest fret distance is on string: " + str(lowestString) + "\n") #for debug
-		print("Lowest fret distance is: " + str(lowestDist) + "\n") #for debug
-		availableStrings.remove(lowestString)
+		rawPosStrings = checkNote(c[t]) #checks which strings the note can be played on
+		relativeDist = {}
+		for k, v in rawPosStrings.items(): #for each string(k), fret(v) in all possible string positions
+			if k in availableStrings: #string isn't playing another note
+				if v == 0: #prioritizing open string
+					relativeDist[k] = -1 #so it's better to do open than playing the same note
+				else:
+					mostRecentRailPositions = railPos[len(railPos)-1] #the latest rail positions
+					posOfString = mostRecentRailPositions[k] #get the position of pusher on string k
+					relativeDist[k] = abs(v - positionOfString) #distance from pusher to note's fret
+
+		lowestString = min(relativeDist, key=relativeDist.get) #string with lowest distance
+		lowestPos = relativeDist[lowestString] #actual lowest distance value
+		availableStrings.remove(lowestString) #the string is going to be playing a note
+		stringsToPick.append(lowestString) #pick the string
+	railPos.append()
+	pickStrings.append(stringsToPick)
