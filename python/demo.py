@@ -1,10 +1,10 @@
 import picking, time
 
 while True:
-    s = input("please enter a value between 1-6 (0 for exit)")
+    s = input("please enter a value between 0-5 (6 for exit)")
     try: 
         s = int(s)
-        if s == 0:
+        if s == 6:
             break
         else:
             picking.pick(s)
