@@ -10,7 +10,7 @@ distance = [
 	#and so on
 ]
 
-#figuring out what valid songs are
+#getting midis in repo
 mypath = getcwd()
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 validSongs = []
@@ -38,9 +38,9 @@ tempoChanges = returnedStuff[0]
 chords = returnedStuff[1]
 
 for s in range(len(tempoChanges)): #example: (1363636, 52920)
-	pass
+	pass #i don't know what we're going to do with this
 
-tune() #if different tuning, put all six strings in argument array
+tune() #if the guitar has a different tuning, put all six strings' notes in argument array
 railPos = [ [10,10,10,10,10,10,0] ] #starting positions of each of the pushers (10 is arbitrary right now)
 									#list in a list because also holds other rail positions
 pickStrings = []
@@ -84,4 +84,10 @@ for c in chords: #example: [(0, 4), (9, 3), 120]
 	newRailPos.append(c.get(len(c)-1)) #append the time of the chord
 	railPos.append(newRailPos) #put the new rail position into list of all of them
 	pickStrings.append(stringsToPick) #put the strings to be picked in the list
-#do stuff with railPos and pickStrings
+
+for i in range(len(pickStrings)):
+	#wait railPos[i+1][6] ticks?
+	for j in railPos[i+1]:
+		#pusher 1 to position railPos[i+1][0]
+	for k in pickStrings[i]: #find a way to pick them at the same time?
+		pick(k)
