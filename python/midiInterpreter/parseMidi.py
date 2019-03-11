@@ -26,11 +26,19 @@ def rawParse(midiName): #only for debugging. Prints all messages
 def parse(midiName):
 	mid = mido.MidiFile(midiName)
 	data = []
+	thereAreNoteOffs = False
 
-	if True: #replace with no note offs
-		data = parseNoOffs()
-	else:
+	for i, track in enumerate(mid.tracks):
+		for msg in track:
+			if msg.type == "note_off":
+				thereAreNoteOffs = True
+				break
+
+	if thereAreNoteOffs:
 		data = parseYesOffs()
+	else:
+		data = parseNoOffs()
+
 	return data
 	
 def parseYesOffs():
@@ -92,13 +100,12 @@ def parseNoOffs():
 				indexOfSpace = m.index(" ",indexOfNote)
 				note = m[indexOfNote:indexOfSpace]
 				chordNotes.append(calcOctave(int(note)))
-				if time != 0:
+				if time != 0: #note does NOT occur in the same chord as last note, then make new chord
 					chordNotes.append(time)
 					chord = []
 					chord.extend(chordNotes)
 					chords.append(chord) #add the 'packaged' chord to the chords
 					chordNotes.clear()
-
 	return tempoChanges, chords
 
 def parseTempo(message):
