@@ -15,6 +15,7 @@ for i in range(len(pickStrings)):
 	
 	#thread 1:
 	for j in railPos[i+1]:
+		pass
 		#pusher 1 to position railPos[i+1][0]
 
 	#thread 2:
