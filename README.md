@@ -8,23 +8,4 @@ link to original project: https://github.com/davshus/lead-zeppelin
 
 i decided to continue this bc i thought it was rly cool
 
-all code is meant for raspberry pi
-
-### Team Leader
-* Mehul Ghosal
-
-### Build Team 
-* Brian Levine
-* Claire Yan
-* Max Santarella
-* Austin Peng
-* Karen Xu
-* Andrew Nuzzolo
-* Alisa Mouravski 
-  
-### Code Team
-* Judy Yeung
-* Shiky Gurung
-* Aoife Weiss
-* Dan O'Sullivan
-* Alex Barker
+run on raspi
